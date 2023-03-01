@@ -1,0 +1,51 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    /* background-image: url("./images/background.jpg");
+    background-repeat: no-repeat;
+    background-size:cover;
+     */
+  }
+
+
+header{
+ display: flex;
+ justify-content: center;  
+}
+
+.neon-effect {
+  font-size: 80px;
+  color: #fff;
+  text-shadow:
+    0 0 10px #fff,
+    0 0 20px #fff,
+    0 0 30px #fff,
+    0 0 40px #f01b5d,
+    0 0 70px #f01b5d,
+    0 0 80px #f01b5d,
+    0 0 100px #f01b5d;
+  animation: neon-glow 1s ease-in-out infinite alternate;
+}
+
+@keyframes neon-glow {
+  from {
+    text-shadow:
+      0 0 10px #fff,
+      0 0 20px #fff,
+      0 0 30px #fff,
+      0 0 40px #f01b5d,
+      0 0 70px #f01b5d,
+      0 0 80px #f01b5d,
+      0 0 100px #f01b5d;
+  }
+  to {
+    text-shadow:
+      0 0 20px #fff,
+      0 0 30px #fff,
+      0 0 40px #fff,
+      0 0 50px #f01b5d,
+      0 0 80px #f01b5d,
+      0 0 90px #f01b5d,
+      0 0 110px #f01b5d;
+  }
+}
