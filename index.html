@@ -1,56 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=, initial-scale=1.0">
-    <title>What the Hail</title>
-    <link rel ="stylesheet" href="./assets/css/styles.css">
-    <link
-    href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
-    rel="stylesheet"
-  />
-  
-</head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
+  rel="stylesheet"></link>
+  <link rel="stylesheet" href="./assets/css/styles.css">
+  <title>What the Hail</title>
 
 
 <body>
-    
-<header class="header">
-    <h1 class="neon-effect">Neon Text</h1>
+  <header>
+   <h1>What the Hail</h1> 
+   <form>
+    <label for="cityInput">Enter a city:</label>
+    <input type="text" id="cityInput">
+    <button type="submit" id="fetchButton">Fetch Weather</button>
+  </form>
+  <div id="city-list"></div>
+  </header>
 
-   <div>
-    <input type="text" placeholder="Search your city">
-  </div>    
-   <button id="fetch-button">Find your weather</button>      
-    
-         
-</header>
-
-<main>
-    <div>
-        <ul>
-            <li>
-
-            </li>
-            <li>
-                
-            </li>
-            <li>
-                
-            </li>
-            <li>
-                
-            </li>
-            <li>
-                
-            </li>
-        </ul>
+  <main>
+    <div class="container">
+      <h2 class="cityName"></h2>
+      <div class="weather-info">
+        <div class="weather-icon"><i class="wi"></i></div>
+        <div class="temperature"></div>
+        <div class="weather-description"></div>
+      </div>
     </div>
-    <footer>
-        
-    </footer>
-</main>
+  </main>
 
+
+
+<script src ="./script.js"></script>
 </body>
 </html>
