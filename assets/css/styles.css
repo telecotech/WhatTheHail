@@ -4,6 +4,9 @@
 }
 
 body {
+  background-image: url("assets/images/weather.jpg");
+  background-repeat: no-repeat;
+  background-size:cover;
   font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
@@ -55,12 +58,7 @@ main {
   margin-top: 2rem;
 }
 
-.backgound{
-  background-image: url("./assets/images/weather.jpg");
-  background-repeat: no-repeat;
-  background-size:cover;
-  
-}
+
 
 .weather-info {
   align-items: center;
@@ -99,7 +97,7 @@ main {
   flex-direction: row;
   align-items: center;
   text-align: center;
-  background-color: blue;
+  background-color: rgb(27, 27, 33);
   width: 30%;
   margin-bottom: 2rem;
   padding: 1rem;
