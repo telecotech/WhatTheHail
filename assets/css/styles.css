@@ -7,7 +7,7 @@ body {
   font-family: 'Open Sans', sans-serif;
   margin: 0;
   padding: 0;
-  background-image: url(./assets/images/weather.jpg);
+  background-image: url("./assets/images/weather.jpg");
 }
 
 header {
