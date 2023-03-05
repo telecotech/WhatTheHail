@@ -7,11 +7,6 @@ body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
-  background-image: url('./assets/images/weather.jpg');
-  background-repeat: no-repeat;
-  background-size:cover;
-  
-  
 }
 
 header {
@@ -58,6 +53,13 @@ main {
   display: flex;
   justify-content: center;
   margin-top: 2rem;
+}
+
+.backgound{
+  background-image: url('./assets/images/weather.jpg');
+  background-repeat: no-repeat;
+  background-size:cover;
+  
 }
 
 .weather-info {
