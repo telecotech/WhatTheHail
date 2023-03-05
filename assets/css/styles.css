@@ -56,7 +56,7 @@ main {
 }
 
 .backgound{
-  background-image: url('./assets/images/weather.jpg');
+  background-image: url("./assets/images/weather.jpg");
   background-repeat: no-repeat;
   background-size:cover;
   
