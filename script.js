@@ -47,7 +47,7 @@ function fetchWeatherData(city) {
             document.querySelector(`.forecast-item:nth-of-type(${i/5+1})`).appendChild(dateEl);
 
             const forecastItems = document.querySelectorAll('.forecast-item');
-            forecastItems.forEach(item => item.style.display = 'flex');
+            forecastItems.forEach(item => item.style.display = 'block');
           }
         });
     });
