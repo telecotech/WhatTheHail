@@ -45,13 +45,15 @@ function fetchWeatherData(city) {
             const dateEl = document.createElement('div');
             dateEl.textContent = forecastDate.toLocaleDateString();
             document.querySelector(`.forecast-item:nth-of-type(${i/5+1})`).appendChild(dateEl);
+
+            const forecastItems = document.querySelectorAll('.forecast-item');
+            forecastItems.forEach(item => item.style.display = 'flex');
           }
         });
     });
 }
 
-const forecastItems = document.querySelectorAll('.forecast-item');
-forecastItems.forEach(item => item.style.display = 'block');
+
 
 function handleFormSubmit(event) {
   event.preventDefault();
