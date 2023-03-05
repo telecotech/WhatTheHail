@@ -7,7 +7,7 @@ body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
-  background-image: url("./assets/images/background.jpg") ;
+  background-image: url("/assets/images/background.jpg");
   background-repeat: none;
   background-size: cover;
 }
@@ -20,7 +20,14 @@ header {
 }
 
 h1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin: 0;
+  
+ 
+
+align-items: center;
 }
 
 form {
@@ -30,9 +37,7 @@ form {
   margin-top: 1rem;
 }
 
-label {
-  display: none;
-}
+
 
 input[type="text"] {
   border: none;
@@ -97,6 +102,9 @@ main {
   flex-direction: row;
   align-items: center;
   text-align: center;
+  border-radius: 10px;
+  border-color: black;
+  border-style: solid;
   background-color: blue;
   width: 30%;
   margin-bottom: 2rem;
