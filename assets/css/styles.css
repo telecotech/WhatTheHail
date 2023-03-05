@@ -4,10 +4,10 @@
 }
 
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
-  background-image: url("./assets/images/weather.jpg");
+  background-image: url("./images/weather.jpg");
 }
 
 header {
