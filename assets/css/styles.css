@@ -4,7 +4,7 @@
 }
 
 body {
-  background-image: url("assets/images/weather.jpg");
+  background-image: url("./image/weather.jpg");
   background-repeat: no-repeat;
   background-size:cover;
   font-family: 'Roboto', sans-serif;
