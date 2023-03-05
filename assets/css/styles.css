@@ -7,10 +7,13 @@ body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
+  background-image: url("./assets/images/background.jpg") ;
+  background-repeat: none;
+  background-size: cover;
 }
 
 header {
-  background: rgb(27, 27, 81);
+  background: transparent;
   color: #fff;
   padding: 1rem;
   text-align: center;
@@ -94,7 +97,7 @@ main {
   flex-direction: row;
   align-items: center;
   text-align: center;
-  background-color: rgb(27, 27, 33);
+  background-color: blue;
   width: 30%;
   margin-bottom: 2rem;
   padding: 1rem;
