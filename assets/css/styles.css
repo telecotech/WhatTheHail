@@ -10,7 +10,7 @@ body {
 }
 
 header {
-  background-color: #2b2d42;
+  background: rgb(27, 27, 81);
   color: #fff;
   padding: 1rem;
   text-align: center;
@@ -63,7 +63,7 @@ main {
   width: 100%;
 }
 
-.wi {
+.wi-owm {
   font-size: 6rem;
   margin-bottom: 1rem;
 }
@@ -80,8 +80,57 @@ main {
   margin-bottom: 1rem;
 }
 
+.forecast {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 2rem;
+}
+
+.forecast-item {
+  display: flex ;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+  background-color: blue;
+  width: 30%;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  
+}
+
+.forecast-item{
+  display:none;
+}
+
+.forecast-item i {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  
+}
+
+
+
+.forecast-temperature {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.forecast-description {
+  text-transform: capitalize;
+  margin-bottom: 0.5rem;
+}
+
+.date {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+
+
 @media only screen and (max-width: 600px) {
-  .weather-info {
+  body {
     max-width: none;
     padding: 0 1rem;
   }
