@@ -1,80 +1,106 @@
-const APIkey = '8bc03c53619b53e2a55878c043a1bdc1';
-const CITY = document.getElementById('cityInput');
-
-
-function fetchWeatherData(city) {
-  const geocodingURL = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${APIkey}`;
-  let weatherURL = '';
-  fetch(geocodingURL)
-    .then(response => response.json())
-    .then(data => {
-      const { lat, lon } = data[0];
-      weatherURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${APIkey}`;
-      fetch(weatherURL)
-        .then(response => response.json())
-        .then(data => {
-          
-          const forecastList = data.list;
-            
-          for (let i = 0; i < forecastList.length; i++) {
-            const forecastData = forecastList[i];
-            const forecastLowF = ((forecastData.main.temp_min - 273.15) * 9/5 + 32).toFixed(0);
-            const forecastHighF = ((forecastData.main.temp_max - 273.15) * 9/5 + 32).toFixed(0);
-            const forecastDate = new Date(forecastData.dt * 1000);
-          
-            const temperatureHighEl = document.createElement('div');
-            temperatureHighEl.textContent = `High: ${Math.round(forecastHighF)}°F`;
-            const temperatureHighContainer = document.querySelector(`.forecast-item:nth-of-type(${i + 2}) .forecast-temperature-high`);
-            if (temperatureHighContainer) {
-              temperatureHighContainer.innerHTML = '';
-              temperatureHighContainer.appendChild(temperatureHighEl);
-            }
-          
-            const temperatureLowEl = document.createElement('div');
-            temperatureLowEl.textContent = `Low: ${Math.round(forecastLowF)}°F`;
-            const temperatureLowContainer = document.querySelector(`.forecast-item:nth-of-type(${i + 3}) .forecast-temperature-low`);
-            if (temperatureLowContainer) {
-              temperatureLowContainer.innerHTML = '';
-              temperatureLowContainer.appendChild(temperatureLowEl);
-            }
-          
-            const weatherIconEl = document.createElement('img');
-            weatherIconEl.src = `https://openweathermap.org/img/wn/${forecastData.weather[0].icon}.png`;
-            const weatherIconContainer = document.querySelector(`.forecast-item:nth-of-type(${i}) .forecast-description`);
-            if (weatherIconContainer) {
-              weatherIconContainer.innerHTML = '';
-              weatherIconContainer.appendChild(weatherIconEl);
-            }
-          
-            const forecastDescriptionEl = document.createElement('div');
-            forecastDescriptionEl.textContent = forecastData.weather[0].description;
-            const forecastDescriptionContainer = document.querySelector(`.forecast-item:nth-of-type(${i + 4}) .forecast-description`);
-            if (forecastDescriptionContainer) {
-              forecastDescriptionContainer.innerHTML = '';
-              forecastDescriptionContainer.appendChild(forecastDescriptionEl);
-            }
-          
-            const dateEl = document.createElement('div');
-            dateEl.textContent = forecastDate.toLocaleDateString();
-            const dateContainer = document.querySelector(`.forecast-item:nth-of-type(${i + 1}) .forecast-item-date`);
-            if (dateContainer) {
-              dateContainer.innerHTML = '';
-              dateContainer.appendChild(dateEl);
-            }
-          }
-          
-          
-      });
-    });
-}
-
-function handleFormSubmit(event) {
-  event.preventDefault();
-  const city = CITY.value.trim();
-  if (city !== '') {
-    fetchWeatherData(city);
+const API_KEY = '8bc03c53619b53e2a55878c043a1bdc1';
+async function fetchWeatherData(city) {
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`;
+  const response = await fetch(url);
+  const data = await response.json();
+  if (response.ok) {
+    const lat = data.coord.lat;
+    const lon = data.coord.lon;
+    const exclude = 'current,minutely,hourly';
+    const url2 = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=${exclude}&units=imperial&appid=${API_KEY}`;
+    const response2 = await fetch(url2);
+    const data2 = await response2.json();
+    if (response2.ok) {
+      return parseWeatherData(data2);
+    } else {
+      throw new Error(data2.message);
+    }
+  } else {
+    throw new Error(data.message);
   }
 }
 
-const fetchButton = document.getElementById('fetchButton');
-fetchButton.addEventListener('click', handleFormSubmit);
+
+
+function parseWeatherData(data) {
+  const dailyWeatherData = [];
+  const dailyDataMap = new Map();
+
+  for (const daily of data.daily) {
+    const date = new Date(daily.dt * 1000);
+    const dateString = date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+
+    const dailyData = {
+      date: dateString,
+      minTemp: Math.round(daily.temp.min),
+      maxTemp: Math.round(daily.temp.max),
+      description: daily.weather[0].description,
+      icon: daily.weather[0].icon,
+    };
+
+    dailyWeatherData.push(dailyData);
+  }
+
+  return dailyWeatherData;
+}
+
+
+
+function displayWeatherData(weatherData) {
+  const table = document.getElementById('weatherTable');
+  table.innerHTML = '';
+
+  const headerRow = document.createElement('tr');
+  const dateHeader = document.createElement('th');
+  const iconHeader = document.createElement('th');
+  const descriptionHeader = document.createElement('th');
+  const minTempHeader = document.createElement('th');
+  const maxTempHeader = document.createElement('th');
+
+  dateHeader.textContent = 'Date';
+  iconHeader.textContent = 'Weather';
+  descriptionHeader.textContent = 'Description';
+  minTempHeader.textContent = 'Min Temp';
+  maxTempHeader.textContent = 'Max Temp';
+
+  headerRow.appendChild(dateHeader);
+  headerRow.appendChild(iconHeader);
+  headerRow.appendChild(descriptionHeader);
+  headerRow.appendChild(minTempHeader);
+  headerRow.appendChild(maxTempHeader);
+
+  table.appendChild(headerRow);
+
+  for (const dailyData of weatherData) {
+    const row = document.createElement('tr');
+    const dateCell = document.createElement('td');
+    const iconCell = document.createElement('td');
+    const descriptionCell = document.createElement('td');
+    const minTempCell = document.createElement('td');
+    const maxTempCell = document.createElement('td');
+    const icon = document.createElement('img');
+
+    dateCell.textContent = dailyData.date;
+    icon.src = `https://openweathermap.org/img/w/${dailyData.icon}.png`;
+    icon.alt = dailyData.description;
+    descriptionCell.textContent = dailyData.description;
+    minTempCell.textContent = `${dailyData.minTemp}°F`;
+    maxTempCell.textContent = `${dailyData.maxTemp}°F`;
+
+    iconCell.appendChild(icon);
+    row.appendChild(dateCell);
+    row.appendChild(iconCell);
+    row.appendChild(descriptionCell);
+    row.appendChild(minTempCell);
+    row.appendChild(maxTempCell);
+
+    table.appendChild(row);
+  }
+}
+
+const searchButton = document.getElementById('searchButton');
+searchButton.addEventListener('click', async () => {
+  const input = document.getElementById('cityInput');
+  const weatherData = await fetchWeatherData(input.value);
+  displayWeatherData(weatherData);
+});

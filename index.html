@@ -1,60 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <title>What the Hail</title>
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet"></link>
-  <link rel="stylesheet" href="./assets/css/styles.css">
-  
-</head>
-<body>
-  <header>
-  <h1>Weather Forecast</h1>
-  <form>
-    <label form="cityInput">City:</label>
-    <input type="text" id="cityInput" name="cityInput">
-    <button id="fetchButton" type="submit">Fetch Weather</button>
-  </form>
-  </header>
-  
-  <main class="weather-info">
-    <div class="forecast-item">
-      <div class="forecast-date"></div>
-      <div class="forecast-temperature-high"></div>
-      <div class="forecast-temperature-low"></div>
-      <div class="forecast-description"></div>
-    </div>
-    <div class="forecast-item">
-      <div class="forecast-date"></div>
-      <div class="forecast-temperature-high"></div>
-      <div class="forecast-temperature-low"></div>
-      <div class="forecast-description"></div>
-    </div>
-    <div class="forecast-item">
-      <div class="forecast-date"></div>
-      <div class="forecast-temperature-high"></div>
-      <div class="forecast-temperature-low"></div>
-      <div class="forecast-description"></div>
-    </div>
-    <div class="forecast-item">
-      <div class="forecast-date"></div>
-      <div class="forecast-temperature-high"></div>
-      <div class="forecast-temperature-low"></div>
-      <div class="forecast-description"></div>
-    </div>
-    <div class="forecast-item">
-      <div class="forecast-date"></div>
-      <div class="forecast-temperature-high"></div>
-      <div class="forecast-temperature-low"></div>
-      <div class="forecast-description"></div>
-    </div>
-  </main>
+  <head>
+    <title>Weather App</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+  </head>
+  <body>
+    <h1>Weather App</h1>
+    <p>Enter a city to get weather data:</p>
+    <input type="text" id="cityInput">
+    <button id="searchButton" type="button">Search</button>
+    <table id="weatherTable"></table>
 
-
-
-
-<script src ="script.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
-
 
