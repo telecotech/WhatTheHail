@@ -13,13 +13,10 @@ function fetchWeatherData(city) {
       fetch(weatherURL)
         .then(response => response.json())
         .then(data => {
-          console.log('weather data', data);
-          const forecastList = data.list;
-
-        
           
-
-          for (let i = 0; i < forecastList.length; i ++) {
+          const forecastList = data.list;
+            
+            for (let i = 0; i < forecastList.length; i ++) {
             const forecastData = forecastList[i];
             const forecastLowF = ((forecastData.main.temp_min - 273.15) * 9/5 + 32).toFixed(0);
             const forecastHighF = ((forecastData.main.temp_max - 273.15) * 9/5 + 32).toFixed(0);
