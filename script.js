@@ -4,7 +4,7 @@ const CITY = document.getElementById('cityInput');
 
 function fetchWeatherData(city) {
   const geocodingURL = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${APIkey}`;
-  let weatherURL = ''; 
+  let weatherURL = '';
   fetch(geocodingURL)
     .then(response => response.json())
     .then(data => {
@@ -13,48 +13,57 @@ function fetchWeatherData(city) {
       fetch(weatherURL)
         .then(response => response.json())
         .then(data => {
-          console.log(data)
-         
-
+          console.log('weather data', data);
           const forecastList = data.list;
-         
+
+        
           
-          for (let i = 0; i < forecastList.length; i += 8) {
-            const forecastData = forecastList[i].main;
-            const forecastDate = new Date(forecastList[i].dt * 1000);
-            const forecastHighF = ((forecastData.temp_max - 273.15) * 9/5 + 32).toFixed(0);
-            const forecastLowF = ((forecastData.temp_min - 273.15) * 9/5 + 32).toFixed(0);
+
+          for (let i = 0; i < forecastList.length; i ++) {
+            const forecastData = forecastList[i];
+            const forecastLowF = ((forecastData.main.temp_min - 273.15) * 9/5 + 32).toFixed(0);
+            const forecastHighF = ((forecastData.main.temp_max - 273.15) * 9/5 + 32).toFixed(0);
+            const forecastDate = new Date(forecastData.dt * 1000);
           
             const temperatureHighEl = document.createElement('div');
             temperatureHighEl.textContent = `High: ${Math.round(forecastHighF)}°F`;
-            document.querySelector(`.forecast-item:nth-of-type(${i/8+1}) .forecast-temperature-high`).appendChild(temperatureHighEl);
+            const temperatureHighContainer = document.querySelector(`.forecast-item:nth-of-type(${i}) .forecast-temperature-high`);
+            if (temperatureHighContainer) {
+              temperatureHighContainer.appendChild(temperatureHighEl);
+            }
           
             const temperatureLowEl = document.createElement('div');
             temperatureLowEl.textContent = `Low: ${Math.round(forecastLowF)}°F`;
-            document.querySelector(`.forecast-item:nth-of-type(${i/8+1}) .forecast-temperature-low`).appendChild(temperatureLowEl);
+            const temperatureLowContainer = document.querySelector(`.forecast-item:nth-of-type(${i}) .forecast-temperature-low`);
+            if (temperatureLowContainer) {
+              temperatureLowContainer.appendChild(temperatureLowEl);
+            }
           
             const weatherIconEl = document.createElement('img');
-            weatherIconEl.src = `http://openweathermap.org/img/wn/${forecastList[i].weather[0].icon}.png`;
-            document.querySelector(`.forecast-item:nth-of-type(${i/8+1}) .forecast-description`).appendChild(weatherIconEl);
+            weatherIconEl.src = `http://openweathermap.org/img/wn/${forecastData.weather[0].icon}.png`;
+            const weatherIconContainer = document.querySelector(`.forecast-item:nth-of-type(${i}) .forecast-description`);
+            if (weatherIconContainer) {
+              weatherIconContainer.appendChild(weatherIconEl);
           
             const forecastDescriptionEl = document.createElement('div');
-            forecastDescriptionEl.textContent = forecastList[i].weather[0].description;
-            const forecastDescriptionContainer = document.querySelector(`.forecast-item:nth-of-type(${i/8+1}) .forecast-description`);
+            forecastDescriptionEl.textContent = forecastData.weather[0].description;
+            const forecastDescriptionContainer = document.querySelector(`.forecast-item:nth-of-type(${i}) .forecast-description`);
             if (forecastDescriptionContainer) {
               forecastDescriptionContainer.appendChild(forecastDescriptionEl);
             }
           
-            const dateEl = document.createElement('div');
-            dateEl.textContent = forecastDate.toLocaleDateString();
-            document.querySelector(`.forecast-item:nth-of-type(${i/8+1})`).appendChild(dateEl);
+          const dateEl = document.createElement('div');
+          dateEl.textContent = forecastDate.toLocaleDateString();
+          const dateContainer = document.querySelector('.forecast-item-date');
+          if (dateContainer) {
+            dateContainer.appendChild(dateEl);
           
-            const forecastItems = document.querySelectorAll('.forecast-item');
-            forecastItems.forEach(item => item.style.display = 'block');
+          const forecastItems = document.querySelectorAll('.forecast-item');
+          forecastItems.forEach(item => item.style.display = 'block');
           }
-
-          
-          
-        });
+            }
+          }
+      });
     });
 }
 
