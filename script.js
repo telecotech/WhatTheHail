@@ -16,7 +16,7 @@ function fetchWeatherData(city) {
           
           const forecastList = data.list;
             
-            for (let i = 0; i < forecastList.length; i ++) {
+          for (let i = 0; i < forecastList.length; i++) {
             const forecastData = forecastList[i];
             const forecastLowF = ((forecastData.main.temp_min - 273.15) * 9/5 + 32).toFixed(0);
             const forecastHighF = ((forecastData.main.temp_max - 273.15) * 9/5 + 32).toFixed(0);
@@ -24,42 +24,46 @@ function fetchWeatherData(city) {
           
             const temperatureHighEl = document.createElement('div');
             temperatureHighEl.textContent = `High: ${Math.round(forecastHighF)}°F`;
-            const temperatureHighContainer = document.querySelector(`.forecast-item:nth-of-type(${i}) .forecast-temperature-high`);
+            const temperatureHighContainer = document.querySelector(`.forecast-item:nth-of-type(${i + 2}) .forecast-temperature-high`);
             if (temperatureHighContainer) {
+              temperatureHighContainer.innerHTML = '';
               temperatureHighContainer.appendChild(temperatureHighEl);
             }
           
             const temperatureLowEl = document.createElement('div');
             temperatureLowEl.textContent = `Low: ${Math.round(forecastLowF)}°F`;
-            const temperatureLowContainer = document.querySelector(`.forecast-item:nth-of-type(${i}) .forecast-temperature-low`);
+            const temperatureLowContainer = document.querySelector(`.forecast-item:nth-of-type(${i + 3}) .forecast-temperature-low`);
             if (temperatureLowContainer) {
+              temperatureLowContainer.innerHTML = '';
               temperatureLowContainer.appendChild(temperatureLowEl);
             }
           
             const weatherIconEl = document.createElement('img');
-            weatherIconEl.src = `http://openweathermap.org/img/wn/${forecastData.weather[0].icon}.png`;
+            weatherIconEl.src = `https://openweathermap.org/img/wn/${forecastData.weather[0].icon}.png`;
             const weatherIconContainer = document.querySelector(`.forecast-item:nth-of-type(${i}) .forecast-description`);
             if (weatherIconContainer) {
+              weatherIconContainer.innerHTML = '';
               weatherIconContainer.appendChild(weatherIconEl);
+            }
           
             const forecastDescriptionEl = document.createElement('div');
             forecastDescriptionEl.textContent = forecastData.weather[0].description;
-            const forecastDescriptionContainer = document.querySelector(`.forecast-item:nth-of-type(${i}) .forecast-description`);
+            const forecastDescriptionContainer = document.querySelector(`.forecast-item:nth-of-type(${i + 4}) .forecast-description`);
             if (forecastDescriptionContainer) {
+              forecastDescriptionContainer.innerHTML = '';
               forecastDescriptionContainer.appendChild(forecastDescriptionEl);
             }
           
-          const dateEl = document.createElement('div');
-          dateEl.textContent = forecastDate.toLocaleDateString();
-          const dateContainer = document.querySelector('.forecast-item-date');
-          if (dateContainer) {
-            dateContainer.appendChild(dateEl);
-          
-          const forecastItems = document.querySelectorAll('.forecast-item');
-          forecastItems.forEach(item => item.style.display = 'block');
-          }
+            const dateEl = document.createElement('div');
+            dateEl.textContent = forecastDate.toLocaleDateString();
+            const dateContainer = document.querySelector(`.forecast-item:nth-of-type(${i + 1}) .forecast-item-date`);
+            if (dateContainer) {
+              dateContainer.innerHTML = '';
+              dateContainer.appendChild(dateEl);
             }
           }
+          
+          
       });
     });
 }
