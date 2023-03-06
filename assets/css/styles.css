@@ -40,7 +40,7 @@ form {
 
 
 input[type="text"] {
-  border: none;
+  border: solid;
   border-radius: 5px;
   padding: 0.5rem;
   width: 100%;
