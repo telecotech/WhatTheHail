@@ -1,6 +1,7 @@
 const API_KEY = '8bc03c53619b53e2a55878c043a1bdc1';
+
 async function fetchWeatherData(city) {
-  const url = `api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid=${API_KEY}`;
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`;
   const response = await fetch(url);
   const data = await response.json();
   if (response.ok) {
@@ -19,6 +20,7 @@ async function fetchWeatherData(city) {
     throw new Error(data.message);
   }
 }
+
 
 
 
@@ -43,7 +45,6 @@ function parseWeatherData(data) {
 
   return dailyWeatherData;
 }
-
 
 
 function displayWeatherData(weatherData) {
@@ -81,7 +82,7 @@ function displayWeatherData(weatherData) {
     const icon = document.createElement('img');
 
     dateCell.textContent = dailyData.date;
-    icon.src = `https://openweathermap.org/img/w/${dailyData.icon}.png`;
+    const iconUrl = `https://openweathermap.org/img/w/${dailyData.icon}.png`;
     icon.alt = dailyData.description;
     descriptionCell.textContent = dailyData.description;
     minTempCell.textContent = `${dailyData.minTemp}°F`;
@@ -103,4 +104,5 @@ searchButton.addEventListener('click', async () => {
   const input = document.getElementById('cityInput');
   const weatherData = await fetchWeatherData(input.value);
   displayWeatherData(weatherData);
+
 });
